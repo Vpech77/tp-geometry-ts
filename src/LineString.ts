@@ -7,6 +7,12 @@ export default class LineString implements Geometry{
     constructor(points?: Array<Point>){
         this.points = points || [];
     }
+    
+    translate(dx: number, dy: number): void {
+        for(let p of this.points){
+            p.translate(dx, dy);
+        }
+    }
 
     isEmpty(): boolean {
         return this.getNumPoints() == 0;

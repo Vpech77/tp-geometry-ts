@@ -22,7 +22,12 @@ describe("test Point", () => {
         expect(p.isEmpty()).to.equal(true);
         const p2 = new Point([3.0,4.0]);
         expect(p2.isEmpty()).to.equal(false);
-    })
+    });
+    it("test Translate", () => {
+        const p = new Point([3.0,4.0]);
+        p.translate(2,2);
+        expect(p.getCoordinate()).to.deep.equal([5.0,6.0]);
+    });
 
 });
 
