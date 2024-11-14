@@ -28,6 +28,14 @@ describe("test Point", () => {
         p.translate(2,2);
         expect(p.getCoordinate()).to.deep.equal([5.0,6.0]);
     });
+    it("test clone", () => {
+        const p = new Point([3.0,4.0]);
+        const p2 = p.clone();
+        expect(p2.getCoordinate()).to.deep.equal([3.0,4.0]);
+        p2.translate(2.0,2.0);
+        expect(p2.getCoordinate()).to.deep.equal([5.0,6.0]);
+        expect(p.getCoordinate()).to.deep.equal([3.0,4.0]);
+    })
 
 });
 

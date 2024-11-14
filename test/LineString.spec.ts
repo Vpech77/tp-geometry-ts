@@ -33,6 +33,21 @@ describe("test LineString", () =>{
         expect(line.getPointN(0).getCoordinate()).to.deep.equal([3.0,3.0]);
         expect(line.getPointN(1).getCoordinate()).to.deep.equal([4.0,4.0]);
     })
+    it("test clone", () => {
+        const p1 = new Point([1.0,1.0]);
+        const p2 = new Point([2.0,2.0]);
+        const line = new LineString([p1, p2]);
+        const line2 = line.clone();
+
+        line2.translate(2.0,2.0);
+
+        expect(line.getPointN(0).getCoordinate()).to.deep.equal([1.0,1.0]);
+        expect(line.getPointN(1).getCoordinate()).to.deep.equal([2.0,2.0]);
+
+        expect(line2.getPointN(0).getCoordinate()).to.deep.equal([3.0,3.0]);
+        expect(line2.getPointN(1).getCoordinate()).to.deep.equal([4.0,4.0]);
+
+    })
 
 
 })

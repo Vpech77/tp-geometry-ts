@@ -8,6 +8,10 @@ export default class Point implements Geometry{
     this.coordinate = coordinate || [Number.NaN, Number.NaN];
   }
 
+  clone(): Point {
+    return new Point([...this.coordinate]);
+  }
+
   isEmpty(): boolean {
     return Number.isNaN(this.coordinate[0]) && Number.isNaN(this.coordinate[1]);
   }
