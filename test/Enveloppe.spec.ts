@@ -33,5 +33,17 @@ describe("test Enveloppe", () => {
         expect(result.getXmax()).to.equal(2.0);
         expect(result.getYmin()).to.equal(0.0);
         expect(result.getYmax()).to.equal(3.0);
+
+        const builder2 = new EnvelopeBuilder();
+        builder2.insert([2.0,1.0]);
+        builder2.insert([1.0,3.0]);
+
+        const result2 = builder2.build();
+
+        expect(result2.getXmin()).to.equal(1.0);
+        expect(result2.getXmax()).to.equal(2.0);
+        expect(result2.getYmin()).to.equal(1.0);
+        expect(result2.getYmax()).to.equal(3.0);
+
     })
 })
