@@ -5,7 +5,7 @@ import Point from "../src/Point";
 describe("test Point", () => {
     it("test default constructor", () => {
         const p = new Point();
-        const coordNaN = [Number.NaN, Number.NaN]
+        const coordNaN = [Number.NaN, Number.NaN];
         expect(p.getCoordinate()).to.deep.equal(coordNaN);
         expect(Number.isNaN(p.x()));
         expect(Number.isNaN(p.y()));
