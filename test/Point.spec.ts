@@ -3,6 +3,8 @@ import { expect } from "chai";
 import Point from "../src/Point";
 import LogGeometryVisitor from "../src/LogGeometryVisitor";
 import WktVisitor from "../src/WktVisitor";
+import EnveloppeBuilder from "../src/EnvelopeBuilder";
+import Enveloppe from "../src/Envelope";
 
 
 describe("test Point", () => {
@@ -78,6 +80,22 @@ describe("test Point", () => {
         {
             const g = new Point([3.0,4.0]);
             expect(g.asText()).to.equal("POINT(3.0 4.0)");
+        }
+    });
+    it("test getEnveloppe", () => {
+        {
+            const g = new Point();
+            const visitor = new EnveloppeBuilder();
+            g.accept(visitor);
+            const env = new Enveloppe();
+            expect(g.getEnvelope().toString()).to.equal(env.toString());
+        }
+        {
+            const g = new Point([3.0,4.0]);
+            const visitor = new EnveloppeBuilder();
+            g.accept(visitor);
+            const env = new Enveloppe([3.0,4.0], [3.0,4.0]);
+            expect(g.getEnvelope().toString()).to.equal(env.toString());
         }
     });
 
