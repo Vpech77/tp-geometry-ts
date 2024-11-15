@@ -2,6 +2,7 @@ import "mocha";
 import { expect } from "chai";
 import Point from "../src/Point";
 import LineString from "../src/LineString";
+import WktVisitor from "../src/WktVisitor";
 
 describe("test LineString", () =>{
     it("test default constructor", () => {
@@ -48,6 +49,26 @@ describe("test LineString", () =>{
         expect(line2.getPointN(1).getCoordinate()).to.deep.equal([4.0,4.0]);
 
     })
+    it("test wkt", () => {
+        const visitor = new WktVisitor();
+        {
+            const geometry = new LineString();
+            geometry.accept(visitor);
+            const wkt = visitor.getResult();
+            expect(wkt).to.equal("LINESTRING IS EMPTY");
+        }
+        {
+            const p1 = new Point([1.0,1.0]);
+            const p2 = new Point([2.0,2.0]);
+            const geometry = new LineString([p1, p2]);
+            geometry.accept(visitor);
+            const wkt = visitor.getResult();
+            expect(wkt).to.equal("LINESTRING(1.0 1.0,2.0 2.0)");
+        }
+
+    })
+
+
 
 
 })

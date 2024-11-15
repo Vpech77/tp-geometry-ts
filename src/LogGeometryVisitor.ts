@@ -7,7 +7,7 @@ export default class LogGeometryVisitor implements GeometryVisitor {
         if (point.isEmpty){
             console.log("Je suis un point vide");
         }
-        console.log('Je suis un point avec x=${point.x()} et y=${point.y()}');
+        console.log(`Je suis un point avec x=${point.x()} et y=${point.y()}`);
 
     }
     visitLineString(line: LineString): void {
@@ -15,7 +15,7 @@ export default class LogGeometryVisitor implements GeometryVisitor {
             console.log("Je suis une polyligne vide");
         }
         else{
-            console.log('Je suis une polyligne définie par ${line.getNumPoints()} point(s)');
+            console.log(`Je suis une polyligne définie par ${line.getNumPoints()} point(s)`);
         }
     }
 

@@ -1,7 +1,7 @@
 import "mocha";
 import { expect } from "chai";
 import Point from "../src/Point";
-import LogGeometryVisitor from "../src/LogGeometryVisitor";
+import WktVisitor from "../src/WktVisitor";
 
 
 describe("test Point", () => {
@@ -37,6 +37,23 @@ describe("test Point", () => {
         p2.translate(2.0,2.0);
         expect(p2.getCoordinate()).to.deep.equal([5.0,6.0]);
         expect(p.getCoordinate()).to.deep.equal([3.0,4.0]);
+    });
+    it("test WktVisitor", () => {
+        const visitor = new WktVisitor();
+        {
+            const geometry = new Point();
+            geometry.accept(visitor);
+            const wkt = visitor.getResult();
+            expect(wkt).to.equal("POINT IS EMPTY");
+        }
+
+        {
+            const geometry = new Point([3.0,4.0]);
+            geometry.accept(visitor);
+            const wkt = visitor.getResult();
+            expect(wkt).to.equal("POINT(3.0 4.0)");
+        }
+
     });
 
 });
