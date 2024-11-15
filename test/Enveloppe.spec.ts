@@ -2,7 +2,6 @@ import "mocha";
 import { expect } from "chai";
 import Enveloppe from "../src/Envelope";
 import EnvelopeBuilder from "../src/EnvelopeBuilder"
-import Point from "../src/Point";
 
 describe("test Enveloppe", () => {
     it("test default constructor", () => {
@@ -34,7 +33,6 @@ describe("test Enveloppe", () => {
         expect(result.getXmax()).to.equal(2.0);
         expect(result.getYmin()).to.equal(0.0);
         expect(result.getYmax()).to.equal(3.0);
-
     });
 
 })
