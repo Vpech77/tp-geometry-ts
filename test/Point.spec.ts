@@ -1,6 +1,8 @@
 import "mocha";
 import { expect } from "chai";
 import Point from "../src/Point";
+import LogGeometryVisitor from "../src/LogGeometryVisitor";
+
 
 describe("test Point", () => {
     it("test default constructor", () => {
@@ -35,7 +37,7 @@ describe("test Point", () => {
         p2.translate(2.0,2.0);
         expect(p2.getCoordinate()).to.deep.equal([5.0,6.0]);
         expect(p.getCoordinate()).to.deep.equal([3.0,4.0]);
-    })
+    });
 
 });
 

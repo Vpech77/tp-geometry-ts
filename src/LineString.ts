@@ -1,4 +1,5 @@
 import Geometry from "./Geometry";
+import GeometryVisitor from "./GeometryVisitor";
 import Point from "./Point";
 
 export default class LineString implements Geometry{
@@ -7,6 +8,11 @@ export default class LineString implements Geometry{
     constructor(points?: Array<Point>){
         this.points = points || [];
     }
+
+    accept(visitor: GeometryVisitor): void {
+        visitor.visitLineString(this);
+    }
+
     clone(): LineString {
         let clone = new LineString();
         for (let p of this.points){

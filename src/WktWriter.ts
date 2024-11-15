@@ -20,6 +20,9 @@ export default class WktWriter {
                 return data;
             }
         }
+        // else{
+        //     throw new TypeError("geometry type not supported");
+        // }
 
     }
 }

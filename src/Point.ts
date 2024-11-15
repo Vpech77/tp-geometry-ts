@@ -1,11 +1,16 @@
 import Coordinate from "./Coordinate";
 import Geometry from "./Geometry";
+import GeometryVisitor from "./GeometryVisitor";
 
 export default class Point implements Geometry{
   private coordinate: Coordinate;
 
   constructor(coordinate?: Coordinate) {
     this.coordinate = coordinate || [Number.NaN, Number.NaN];
+  }
+
+  accept(visitor: GeometryVisitor): void {
+      visitor.visitPoint(this);
   }
 
   clone(): Point {
