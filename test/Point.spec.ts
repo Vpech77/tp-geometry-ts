@@ -1,6 +1,7 @@
 import "mocha";
 import { expect } from "chai";
 import Point from "../src/Point";
+import LogGeometryVisitor from "../src/LogGeometryVisitor";
 import WktVisitor from "../src/WktVisitor";
 
 
@@ -38,6 +39,22 @@ describe("test Point", () => {
         expect(p2.getCoordinate()).to.deep.equal([5.0,6.0]);
         expect(p.getCoordinate()).to.deep.equal([3.0,4.0]);
     });
+    it("test LogGeometryVisitor", () => {
+        let result = "";
+        const vis =  new LogGeometryVisitor((message) =>{
+            result = message;
+        });
+        {
+            const g = new Point();
+            g.accept(vis);
+            expect(result).to.equal("Je suis un point vide");
+        }
+        {
+            const g = new Point([3.0,4.0]);
+            g.accept(vis);
+            expect(result).to.equal("Je suis un point avec x=3.0 et y=4.0");
+        }
+    });
     it("test WktVisitor", () => {
         const visitor = new WktVisitor();
         {
@@ -46,15 +63,24 @@ describe("test Point", () => {
             const wkt = visitor.getResult();
             expect(wkt).to.equal("POINT IS EMPTY");
         }
-
         {
             const geometry = new Point([3.0,4.0]);
             geometry.accept(visitor);
             const wkt = visitor.getResult();
             expect(wkt).to.equal("POINT(3.0 4.0)");
         }
-
     });
+    it("test asText", () => {
+        {
+            const g = new Point();
+            expect(g.asText()).to.equal("POINT IS EMPTY");
+        }
+        {
+            const g = new Point([3.0,4.0]);
+            expect(g.asText()).to.equal("POINT(3.0 4.0)");
+        }
+    });
+
 
 });
 

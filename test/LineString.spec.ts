@@ -3,6 +3,7 @@ import { expect } from "chai";
 import Point from "../src/Point";
 import LineString from "../src/LineString";
 import WktVisitor from "../src/WktVisitor";
+import LogGeometryVisitor from "../src/LogGeometryVisitor";
 
 describe("test LineString", () =>{
     it("test default constructor", () => {
@@ -48,7 +49,26 @@ describe("test LineString", () =>{
         expect(line2.getPointN(0).getCoordinate()).to.deep.equal([3.0,3.0]);
         expect(line2.getPointN(1).getCoordinate()).to.deep.equal([4.0,4.0]);
 
-    })
+    });
+    it("test LogGeometryVisitor", () => {
+        let result = "";
+        const vis =  new LogGeometryVisitor((message) =>{
+            result = message;
+        });
+        {
+            const g = new LineString();
+            g.accept(vis);
+            expect(result).to.equal("Je suis une polyligne vide");
+        }
+        {
+            const p1 = new Point([1.0,1.0]);
+            const p2 = new Point([2.0,2.0]);
+            const g = new LineString([p1, p2]);
+            g.accept(vis);
+            expect(result).to.equal("Je suis une polyligne définie par 2 point(s)");
+        }
+    });
+    
     it("test wkt", () => {
         const visitor = new WktVisitor();
         {
@@ -65,8 +85,20 @@ describe("test LineString", () =>{
             const wkt = visitor.getResult();
             expect(wkt).to.equal("LINESTRING(1.0 1.0,2.0 2.0)");
         }
+    });
 
-    })
+    it("test asText", () => {
+        {
+            const g = new LineString();
+            expect(g.asText()).to.equal("LINESTRING IS EMPTY");
+        }
+        {
+            const p1 = new Point([1.0,1.0]);
+            const p2 = new Point([2.0,2.0]);
+            const g = new LineString([p1, p2]);
+            expect(g.asText()).to.equal("LINESTRING(1.0 1.0,2.0 2.0)");
+        }
+    });
 
 
 
