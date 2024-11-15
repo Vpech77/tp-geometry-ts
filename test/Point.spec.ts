@@ -58,14 +58,15 @@ describe("test Point", () => {
         }
     });
     it("test WktVisitor", () => {
-        const visitor = new WktVisitor();
         {
+            const visitor = new WktVisitor();
             const geometry = new Point();
             geometry.accept(visitor);
             const wkt = visitor.getResult();
             expect(wkt).to.equal("POINT IS EMPTY");
         }
         {
+            const visitor = new WktVisitor();
             const geometry = new Point([3.0,4.0]);
             geometry.accept(visitor);
             const wkt = visitor.getResult();
