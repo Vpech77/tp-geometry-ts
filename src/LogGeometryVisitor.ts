@@ -6,8 +6,7 @@ import Point from "./Point";
 export default class LogGeometryVisitor implements GeometryVisitor {
     constructor(
         private log = console.log
-    ){
-    }
+    ){}
     
     visitGeometryCollection(g: GeometryCollection) {
         if (g.isEmpty()){
