@@ -13,14 +13,16 @@ export default class WktVisitor implements GeometryVisitor {
 
     visitGeometryCollection(g: GeometryCollection) {
         if (g.isEmpty()){
-            this.buffer += "GEOMETRYCOLLECTION EMPTY";
+            this.buffer += "GEOMETRYCOLLECTION IS EMPTY";
         }
         else{
             let data = "GEOMETRYCOLLECTION(";
             for (var i=0;i<g.getNumGeometries()-1; i++){
-                data += g.getGeometryN(i).accept(this) + ",";
+                g.getGeometryN(i).accept(this);
+                data += this.getResult() + ",";
             };
-            data += g.getGeometryN(i).accept(this) +")";
+            g.getGeometryN(i).accept(this);
+            data += this.getResult() +")";
             this.buffer = data;
         }
     }

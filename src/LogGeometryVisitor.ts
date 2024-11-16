@@ -11,10 +11,10 @@ export default class LogGeometryVisitor implements GeometryVisitor {
     
     visitGeometryCollection(g: GeometryCollection) {
         if (g.isEmpty()){
-            this.log("Je suis une geometryCollection vide");
+            this.log("Je suis une GeometryCollection vide");
         }
         else{
-            this.log(`Je suis une geometryCollection avec ${g.getNumGeometries()}`);
+            this.log(`Je suis une GeometryCollection avec ${g.getNumGeometries()} geometrie(s)`);
         }
     }
 

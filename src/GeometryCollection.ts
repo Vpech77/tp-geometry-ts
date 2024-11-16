@@ -6,7 +6,7 @@ export default class GeometryCollection extends AbstractGeometry{
 
     private geometries : Array<Geometry>;
 
-    constructor(geometries: Array<Geometry>){
+    constructor(geometries?: Array<Geometry>){
         super();
         this.geometries = geometries || [];
     }
@@ -30,7 +30,7 @@ export default class GeometryCollection extends AbstractGeometry{
             g.translate(dx, dy);
         }
     }
-    clone(): Geometry {
+    clone(): GeometryCollection {
         return new GeometryCollection(this.geometries.map((g) => g.clone()));
     }
     accept(visitor: GeometryVisitor): void {
