@@ -40,7 +40,7 @@ export default class EnveloppeBuilder implements GeometryVisitor{
             this.insert(line.getPointN(i).getCoordinate());
         }
     }
-
+    
     visitGeometryCollection(g: GeometryCollection){
         for (let i=0; i<g.getNumGeometries(); i++){
             g.getGeometryN(i).accept(this);

@@ -39,9 +39,8 @@ export default class LineString extends AbstractGeometry{
     getNumPoints(): number {
         return this.points.length;
     }
-
+    
     getPointN(n: number): Point{
         return this.points[n];
     }
-
 }

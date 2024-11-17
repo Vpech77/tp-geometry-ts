@@ -30,8 +30,4 @@ export default class Enveloppe {
         return "bottomLeft : " + this.getXmin() + " " + this.getYmin() + 
                 " | topRight : " + this.getXmax() + " " + this.getYmax();
     }
-
-
-
-
 }

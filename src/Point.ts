@@ -42,5 +42,4 @@ export default class Point extends AbstractGeometry{
   y(): number {
     return this.coordinate[1];
   }
-
 }

@@ -34,5 +34,4 @@ export default class LogGeometryVisitor implements GeometryVisitor {
             this.log(`Je suis une polyligne définie par ${line.getNumPoints()} point(s)`);
         }
     }
-
 }

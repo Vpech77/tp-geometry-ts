@@ -3,7 +3,6 @@ import Geometry from "./Geometry";
 import GeometryVisitor from "./GeometryVisitor";
 
 export default class GeometryCollection extends AbstractGeometry{
-
     private geometries : Array<Geometry>;
 
     constructor(geometries?: Array<Geometry>){
@@ -36,7 +35,4 @@ export default class GeometryCollection extends AbstractGeometry{
     accept(visitor: GeometryVisitor): void {
         visitor.visitGeometryCollection(this);
     }
-
-
-
 }
