@@ -5,5 +5,5 @@ import Point from "./Point";
 export default interface GeometryVisitor {
     visitPoint(point: Point): void;
     visitLineString(line: LineString): void;
-    visitGeometryCollection(g: GeometryCollection);
+    visitGeometryCollection(g: GeometryCollection): void;
 }
