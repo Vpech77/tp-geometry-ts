@@ -33,7 +33,7 @@ export default class GeometryWithCachedEnvelope implements Geometry {
         return this.original.clone()
     }
 
-    accept(visitor: GeometryVisitor): void {
+    accept<T>(visitor: GeometryVisitor<T>): T {
         return this.original.accept(visitor);
     }
     

@@ -3,7 +3,7 @@ import GeometryVisitor from "./GeometryVisitor";
 import LineString from "./LineString";
 import Point from "./Point";
 
-export default class WktVisitor implements GeometryVisitor {
+export default class WktVisitor implements GeometryVisitor<string> {
 
     private buffer: string;
 
@@ -11,32 +11,32 @@ export default class WktVisitor implements GeometryVisitor {
         this.buffer = "";
     }
 
-    visitGeometryCollection(g: GeometryCollection) {
+    visitGeometryCollection(g: GeometryCollection): string {
         if (g.isEmpty()){
             this.buffer += "GEOMETRYCOLLECTION IS EMPTY";
         }
         else{
             let data = "GEOMETRYCOLLECTION(";
             for (var i=0;i<g.getNumGeometries()-1; i++){
-                g.getGeometryN(i).accept(this);
-                data += this.getResult() + ",";
+                data += g.getGeometryN(i).accept(this) + ",";
             };
-            g.getGeometryN(i).accept(this);
-            data += this.getResult() +")";
+            data += g.getGeometryN(i).accept(this) +")";
             this.buffer = data;
         }
+        return this.buffer;
     }
 
-    visitPoint(point: Point): void {
+    visitPoint(point: Point): string {
         if (point.isEmpty()){
             this.buffer += "POINT IS EMPTY";
         }
         else{
             this.buffer += `POINT(${point.x().toFixed(1)} ${point.y().toFixed(1)})`;
         }
+        return this.buffer;
     };
 
-    visitLineString(line: LineString): void {
+    visitLineString(line: LineString): string {
         if (line.isEmpty()){
             this.buffer += "LINESTRING IS EMPTY";
         }
@@ -48,9 +48,6 @@ export default class WktVisitor implements GeometryVisitor {
             data += line.getPointN(i).x().toFixed(1) + " " + line.getPointN(i).y().toFixed(1) +")";
             this.buffer += data;
         }
-    };
-
-    getResult(): string {
         return this.buffer;
     };
 }

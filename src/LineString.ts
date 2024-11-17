@@ -10,8 +10,8 @@ export default class LineString extends AbstractGeometry{
         this.points = points || [];
     }
 
-    accept(visitor: GeometryVisitor): void {
-        visitor.visitLineString(this);
+    accept<T>(visitor: GeometryVisitor<T>): T {
+        return visitor.visitLineString(this);
     }
 
     clone(): LineString {
@@ -39,7 +39,7 @@ export default class LineString extends AbstractGeometry{
     getNumPoints(): number {
         return this.points.length;
     }
-    
+
     getPointN(n: number): Point{
         return this.points[n];
     }

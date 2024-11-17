@@ -5,7 +5,7 @@ import GeometryVisitor from "./GeometryVisitor";
 import LineString from "./LineString";
 import Point from "./Point";
 
-export default class EnveloppeBuilder implements GeometryVisitor{
+export default class EnveloppeBuilder implements GeometryVisitor<void>{
     private xMin: number;
     private yMin: number;
     private xMax: number;
@@ -41,7 +41,7 @@ export default class EnveloppeBuilder implements GeometryVisitor{
         }
     }
     
-    visitGeometryCollection(g: GeometryCollection){
+    visitGeometryCollection(g: GeometryCollection): void {
         for (let i=0; i<g.getNumGeometries(); i++){
             g.getGeometryN(i).accept(this);
         }
