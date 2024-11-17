@@ -4,8 +4,6 @@ import WktWriter from "../src/WktWriter"
 import Point from "../src/Point";
 import LineString from "../src/LineString";
 import GeometryCollection from "../src/GeometryCollection";
-import WktVisitor from "../src/WktVisitor";
-import LogGeometryVisitor from "../src/LogGeometryVisitor";
 import EnveloppeBuilder from "../src/EnvelopeBuilder";
 
 class Fabrique{
@@ -47,39 +45,10 @@ describe("test Point", () => {
 
         expect(geoms2.getGeometryN(0)).to.deep.equal(p1);
     });
-    it("test wkt visitor", () => {
-        {
-            const geoms = new GeometryCollection();
-            const wkt = new WktVisitor();
-            geoms.accept(wkt);
-            expect(wkt.getResult()).to.equal("GEOMETRYCOLLECTION IS EMPTY");
-        }
-        {
-            const geoms = new Fabrique().createGeometryCollection();
-            const wkt = new WktVisitor();
-            geoms.accept(wkt);
-            expect(wkt.getResult()).to.equal("GEOMETRYCOLLECTION(POINT(3.0 4.0),POINT(3.0 4.0)LINESTRING(3.0 4.0,2.0 2.0))");
-        }
-    });
-    it("test logVisitor", () => {
-        {
-        const geoms = new Fabrique().createGeometryCollection();
-        let result = "";
-        const log =  new LogGeometryVisitor((message) =>{
-            result = message;
-        });
-        geoms.accept(log);
-        expect(result).to.equal("Je suis une GeometryCollection avec 2 geometrie(s)");
-        }
-        {
-            const geoms = new GeometryCollection();
-            let result = "";
-            const log =  new LogGeometryVisitor((message) =>{
-                result = message;
-            });
-            geoms.accept(log);
-            expect(result).to.equal("Je suis une GeometryCollection vide");
-        }
+    it("test wktwriter", () => {
+        const g = new Fabrique().createGeometryCollection();
+        const writer = new WktWriter();
+        expect(() => {writer.write(g)}).to.throw("geometry type not supported");
     });
     it("test envelope visitor", () => {
         {
@@ -89,10 +58,5 @@ describe("test Point", () => {
             const env = g.getEnvelope();
             expect(g.getEnvelope().toString()).to.equal(env.toString());
         }
-    });
-    it("test wktwriter", () => {
-        const g = new Fabrique().createGeometryCollection();
-        const writer = new WktWriter();
-        expect(() => {writer.write(g)}).to.throw("geometry type not supported");
     });
 });

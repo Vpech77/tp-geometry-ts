@@ -10,8 +10,8 @@ export default class Point extends AbstractGeometry{
     this.coordinate = coordinate || [Number.NaN, Number.NaN];
   }
 
-  accept(visitor: GeometryVisitor): void {
-      visitor.visitPoint(this);
+  accept<T>(visitor: GeometryVisitor<T>): T {
+      return visitor.visitPoint(this);
   }
 
   clone(): Point {

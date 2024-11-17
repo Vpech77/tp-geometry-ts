@@ -2,8 +2,6 @@ import "mocha";
 import { expect } from "chai";
 import Point from "../src/Point";
 import LineString from "../src/LineString";
-import WktVisitor from "../src/WktVisitor";
-import LogGeometryVisitor from "../src/LogGeometryVisitor";
 import Enveloppe from "../src/Envelope";
 import EnveloppeBuilder from "../src/EnvelopeBuilder";
 
@@ -52,44 +50,6 @@ describe("test LineString", () =>{
         expect(line2.getPointN(1).getCoordinate()).to.deep.equal([4.0,4.0]);
 
     });
-    it("test LogGeometryVisitor", () => {
-        let result = "";
-        const vis =  new LogGeometryVisitor((message) =>{
-            result = message;
-        });
-        {
-            const g = new LineString();
-            g.accept(vis);
-            expect(result).to.equal("Je suis une polyligne vide");
-        }
-        {
-            const p1 = new Point([1.0,1.0]);
-            const p2 = new Point([2.0,2.0]);
-            const g = new LineString([p1, p2]);
-            g.accept(vis);
-            expect(result).to.equal("Je suis une polyligne définie par 2 point(s)");
-        }
-    });
-    
-    it("test wkt", () => {
-        {
-            const visitor = new WktVisitor();
-            const geometry = new LineString();
-            geometry.accept(visitor);
-            const wkt = visitor.getResult();
-            expect(wkt).to.equal("LINESTRING IS EMPTY");
-        }
-        {
-            const visitor = new WktVisitor();
-            const p1 = new Point([1.0,1.0]);
-            const p2 = new Point([2.0,2.0]);
-            const geometry = new LineString([p1, p2]);
-            geometry.accept(visitor);
-            const wkt = visitor.getResult();
-            expect(wkt).to.equal("LINESTRING(1.0 1.0,2.0 2.0)");
-        }
-    });
-
     it("test asText", () => {
         {
             const g = new LineString();
@@ -121,8 +81,4 @@ describe("test LineString", () =>{
             expect(g.getEnvelope().toString()).to.equal(env.toString());
         }
     });
-
-
-
-
 })

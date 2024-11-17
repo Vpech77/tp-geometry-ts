@@ -34,9 +34,7 @@ describe("test GeometryWithCachedEnvelope", () => {
         g = new GeometryWithCachedEnvelope(g);
 
         const visitor = new WktVisitor()
-        g.accept(visitor);
-        const wkt = visitor.getResult();
-        expect(wkt).to.equal("POINT(3.0 3.0)");
+        expect(g.accept(visitor)).to.equal("POINT(3.0 3.0)");
     });
 });
 

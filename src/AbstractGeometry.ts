@@ -10,11 +10,10 @@ export default abstract class AbstractGeometry implements Geometry{
     abstract isEmpty(): boolean;
     abstract translate(dx: number, dy: number): void;
     abstract clone(): Geometry;
-    abstract accept(visitor: GeometryVisitor): void;
+    abstract accept<T>(visitor: GeometryVisitor<T>): T;
     asText(): string {
         const visitor = new WktVisitor();
-        this.accept(visitor);
-        return visitor.getResult();
+        return this.accept(visitor);
     }
     getEnvelope(): Enveloppe {
         const visitor = new EnveloppeBuilder();
