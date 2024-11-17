@@ -5,12 +5,6 @@ import Point from "./Point";
 
 export default class WktVisitor implements GeometryVisitor<string> {
 
-    private buffer: string;
-
-    constructor(){
-        this.buffer = "";
-    }
-
     visitPoint(point: Point): string {
         if (point.isEmpty()){
             return "POINT IS EMPTY";
