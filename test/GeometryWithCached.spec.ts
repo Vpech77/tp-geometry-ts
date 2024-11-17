@@ -29,14 +29,12 @@ describe("test GeometryWithCachedEnvelope", () => {
         g.translate(1.0,1.0);
         expect(g.asText()).to.equal("POINT(4.0 4.0)");
     });
-    // it("test visitor", () => {
-    //     let g : Geometry = new Point([3.0,3.0]);
-    //     g = new GeometryWithCachedEnvelope(g);
+    it("test visitor", () => {
+        let g : Geometry = new Point([3.0,3.0]);
+        g = new GeometryWithCachedEnvelope(g);
 
-    //     const visitor = new WktVisitor()
-    //     g.accept(visitor);
-    //     const wkt = visitor.getResult();
-    //     expect(wkt).to.equal("POINT(3.0 3.0)");
-    // });
+        const visitor = new WktVisitor()
+        expect(g.accept(visitor)).to.equal("POINT(3.0 3.0)");
+    });
 });
 

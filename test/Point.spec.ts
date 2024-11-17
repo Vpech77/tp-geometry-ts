@@ -41,34 +41,31 @@ describe("test Point", () => {
         expect(p2.getCoordinate()).to.deep.equal([5.0,6.0]);
         expect(p.getCoordinate()).to.deep.equal([3.0,4.0]);
     });
-
-    // it("test asText", () => {
-    //     {
-    //         const g = new Point();
-    //         expect(g.asText()).to.equal("POINT IS EMPTY");
-    //     }
-    //     {
-    //         const g = new Point([3.0,4.0]);
-    //         expect(g.asText()).to.equal("POINT(3.0 4.0)");
-    //     }
-    // });
-    // it("test getEnveloppe", () => {
-    //     {
-    //         const g = new Point();
-    //         const visitor = new EnveloppeBuilder();
-    //         g.accept(visitor);
-    //         const env = new Enveloppe();
-    //         expect(g.getEnvelope().toString()).to.equal(env.toString());
-    //     }
-    //     {
-    //         const g = new Point([3.0,4.0]);
-    //         const visitor = new EnveloppeBuilder();
-    //         g.accept(visitor);
-    //         const env = new Enveloppe([3.0,4.0], [3.0,4.0]);
-    //         expect(g.getEnvelope().toString()).to.equal(env.toString());
-    //     }
-    // });
-
-
+    it("test asText", () => {
+        {
+            const g = new Point();
+            expect(g.asText()).to.equal("POINT IS EMPTY");
+        }
+        {
+            const g = new Point([3.0,4.0]);
+            expect(g.asText()).to.equal("POINT(3.0 4.0)");
+        }
+    });
+    it("test getEnveloppe", () => {
+        {
+            const g = new Point();
+            const visitor = new EnveloppeBuilder();
+            g.accept(visitor);
+            const env = new Enveloppe();
+            expect(g.getEnvelope().toString()).to.equal(env.toString());
+        }
+        {
+            const g = new Point([3.0,4.0]);
+            const visitor = new EnveloppeBuilder();
+            g.accept(visitor);
+            const env = new Enveloppe([3.0,4.0], [3.0,4.0]);
+            expect(g.getEnvelope().toString()).to.equal(env.toString());
+        }
+    });
 });
 

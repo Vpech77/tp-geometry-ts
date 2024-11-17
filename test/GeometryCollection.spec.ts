@@ -4,8 +4,6 @@ import WktWriter from "../src/WktWriter"
 import Point from "../src/Point";
 import LineString from "../src/LineString";
 import GeometryCollection from "../src/GeometryCollection";
-import WktVisitor from "../src/WktVisitor";
-import LogGeometryVisitor from "../src/LogGeometryVisitor";
 import EnveloppeBuilder from "../src/EnvelopeBuilder";
 
 class Fabrique{
@@ -52,14 +50,13 @@ describe("test Point", () => {
         const writer = new WktWriter();
         expect(() => {writer.write(g)}).to.throw("geometry type not supported");
     });
-
-    // it("test envelope visitor", () => {
-    //     {
-    //         const g = new Fabrique().createGeometryCollection();
-    //         const visitor = new EnveloppeBuilder();
-    //         g.accept(visitor);
-    //         const env = g.getEnvelope();
-    //         expect(g.getEnvelope().toString()).to.equal(env.toString());
-    //     }
-    // });
+    it("test envelope visitor", () => {
+        {
+            const g = new Fabrique().createGeometryCollection();
+            const visitor = new EnveloppeBuilder();
+            g.accept(visitor);
+            const env = g.getEnvelope();
+            expect(g.getEnvelope().toString()).to.equal(env.toString());
+        }
+    });
 });

@@ -2,8 +2,6 @@ import "mocha";
 import { expect } from "chai";
 import Point from "../src/Point";
 import LineString from "../src/LineString";
-import WktVisitor from "../src/WktVisitor";
-import LogGeometryVisitor from "../src/LogGeometryVisitor";
 import Enveloppe from "../src/Envelope";
 import EnveloppeBuilder from "../src/EnvelopeBuilder";
 
@@ -52,41 +50,35 @@ describe("test LineString", () =>{
         expect(line2.getPointN(1).getCoordinate()).to.deep.equal([4.0,4.0]);
 
     });
+    it("test asText", () => {
+        {
+            const g = new LineString();
+            expect(g.asText()).to.equal("LINESTRING IS EMPTY");
+        }
+        {
+            const p1 = new Point([1.0,1.0]);
+            const p2 = new Point([2.0,2.0]);
+            const g = new LineString([p1, p2]);
+            expect(g.asText()).to.equal("LINESTRING(1.0 1.0,2.0 2.0)");
+        }
+    });
+    it("test getEnveloppe", () => {
+        {
+            const g = new LineString();
+            const visitor = new EnveloppeBuilder();
+            g.accept(visitor);
+            const env = new Enveloppe();
+            expect(g.getEnvelope().toString()).to.equal(env.toString());
+        }
+        {
+            const p1 = new Point([1.0,1.0]);
+            const p2 = new Point([2.0,2.0]);
+            const g = new LineString([p1, p2]);
 
-
-    // it("test asText", () => {
-    //     {
-    //         const g = new LineString();
-    //         expect(g.asText()).to.equal("LINESTRING IS EMPTY");
-    //     }
-    //     {
-    //         const p1 = new Point([1.0,1.0]);
-    //         const p2 = new Point([2.0,2.0]);
-    //         const g = new LineString([p1, p2]);
-    //         expect(g.asText()).to.equal("LINESTRING(1.0 1.0,2.0 2.0)");
-    //     }
-    // });
-    // it("test getEnveloppe", () => {
-    //     {
-    //         const g = new LineString();
-    //         const visitor = new EnveloppeBuilder();
-    //         g.accept(visitor);
-    //         const env = new Enveloppe();
-    //         expect(g.getEnvelope().toString()).to.equal(env.toString());
-    //     }
-    //     {
-    //         const p1 = new Point([1.0,1.0]);
-    //         const p2 = new Point([2.0,2.0]);
-    //         const g = new LineString([p1, p2]);
-
-    //         const visitor = new EnveloppeBuilder();
-    //         g.accept(visitor);
-    //         const env = new Enveloppe(p1.getCoordinate(), p2.getCoordinate());
-    //         expect(g.getEnvelope().toString()).to.equal(env.toString());
-    //     }
-    // });
-
-
-
-
+            const visitor = new EnveloppeBuilder();
+            g.accept(visitor);
+            const env = new Enveloppe(p1.getCoordinate(), p2.getCoordinate());
+            expect(g.getEnvelope().toString()).to.equal(env.toString());
+        }
+    });
 })
