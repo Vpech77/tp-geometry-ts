@@ -70,25 +70,7 @@ describe("test LineString", () =>{
     //         expect(result).to.equal("Je suis une polyligne définie par 2 point(s)");
     //     }
     // });
-    
-    // it("test wkt", () => {
-    //     {
-    //         const visitor = new WktVisitor();
-    //         const geometry = new LineString();
-    //         geometry.accept(visitor);
-    //         const wkt = visitor.getResult();
-    //         expect(wkt).to.equal("LINESTRING IS EMPTY");
-    //     }
-    //     {
-    //         const visitor = new WktVisitor();
-    //         const p1 = new Point([1.0,1.0]);
-    //         const p2 = new Point([2.0,2.0]);
-    //         const geometry = new LineString([p1, p2]);
-    //         geometry.accept(visitor);
-    //         const wkt = visitor.getResult();
-    //         expect(wkt).to.equal("LINESTRING(1.0 1.0,2.0 2.0)");
-    //     }
-    // });
+
 
     // it("test asText", () => {
     //     {

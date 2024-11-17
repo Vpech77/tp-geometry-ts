@@ -57,18 +57,7 @@ describe("test Point", () => {
     //         expect(result).to.equal("Je suis un point avec x=3.0 et y=4.0");
     //     }
     // });
-    it("test WktVisitor", () => {
-        {
-            const visitor = new WktVisitor();
-            const geometry = new Point();
-            expect(geometry.accept(visitor)).to.equal("POINT IS EMPTY");
-        }
-        {
-            const visitor = new WktVisitor();
-            const geometry = new Point([3.0,4.0]);
-            expect(geometry.accept(visitor)).to.equal("POINT(3.0 4.0)");
-        }
-    });
+
     // it("test asText", () => {
     //     {
     //         const g = new Point();

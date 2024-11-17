@@ -47,20 +47,7 @@ describe("test Point", () => {
 
         expect(geoms2.getGeometryN(0)).to.deep.equal(p1);
     });
-    // it("test wkt visitor", () => {
-    //     {
-    //         const geoms = new GeometryCollection();
-    //         const wkt = new WktVisitor();
-    //         geoms.accept(wkt);
-    //         expect(wkt.getResult()).to.equal("GEOMETRYCOLLECTION IS EMPTY");
-    //     }
-    //     {
-    //         const geoms = new Fabrique().createGeometryCollection();
-    //         const wkt = new WktVisitor();
-    //         geoms.accept(wkt);
-    //         expect(wkt.getResult()).to.equal("GEOMETRYCOLLECTION(POINT(3.0 4.0),POINT(3.0 4.0)LINESTRING(3.0 4.0,2.0 2.0))");
-    //     }
-    // });
+
     // it("test logVisitor", () => {
     //     {
     //     const geoms = new Fabrique().createGeometryCollection();
