@@ -52,24 +52,6 @@ describe("test LineString", () =>{
         expect(line2.getPointN(1).getCoordinate()).to.deep.equal([4.0,4.0]);
 
     });
-    // it("test LogGeometryVisitor", () => {
-    //     let result = "";
-    //     const vis =  new LogGeometryVisitor((message) =>{
-    //         result = message;
-    //     });
-    //     {
-    //         const g = new LineString();
-    //         g.accept(vis);
-    //         expect(result).to.equal("Je suis une polyligne vide");
-    //     }
-    //     {
-    //         const p1 = new Point([1.0,1.0]);
-    //         const p2 = new Point([2.0,2.0]);
-    //         const g = new LineString([p1, p2]);
-    //         g.accept(vis);
-    //         expect(result).to.equal("Je suis une polyligne définie par 2 point(s)");
-    //     }
-    // });
 
 
     // it("test asText", () => {

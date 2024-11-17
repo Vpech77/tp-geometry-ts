@@ -41,22 +41,6 @@ describe("test Point", () => {
         expect(p2.getCoordinate()).to.deep.equal([5.0,6.0]);
         expect(p.getCoordinate()).to.deep.equal([3.0,4.0]);
     });
-    // it("test LogGeometryVisitor", () => {
-    //     let result = "";
-    //     const vis =  new LogGeometryVisitor((message) =>{
-    //         result = message;
-    //     });
-    //     {
-    //         const g = new Point();
-    //         g.accept(vis);
-    //         expect(result).to.equal("Je suis un point vide");
-    //     }
-    //     {
-    //         const g = new Point([3.0,4.0]);
-    //         g.accept(vis);
-    //         expect(result).to.equal("Je suis un point avec x=3.0 et y=4.0");
-    //     }
-    // });
 
     // it("test asText", () => {
     //     {
